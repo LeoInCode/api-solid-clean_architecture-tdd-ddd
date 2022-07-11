@@ -1,0 +1,22 @@
+{
+  "name": "solid-clean_architecture-tdd-ddd",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido seguindo o curso do Rodrigo Mango",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoInCode/solid-clean_architecture-tdd-ddd.git"
+  },
+  "author": "Leonardo Mendes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeoInCode/solid-clean_architecture-tdd-ddd/issues"
+  },
+  "homepage": "https://github.com/LeoInCode/solid-clean_architecture-tdd-ddd#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^4.1.3"
+  }
+}
