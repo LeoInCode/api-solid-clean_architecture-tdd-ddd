@@ -4,7 +4,8 @@
   "description": "Projeto desenvolvido seguindo o curso do Rodrigo Mango",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:staged": "jest"
   },
   "repository": {
     "type": "git",
