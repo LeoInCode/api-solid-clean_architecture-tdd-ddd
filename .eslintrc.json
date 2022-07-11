@@ -1,0 +1,37 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "class-methods-use-this": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-useless-constructor": "off",
+        "@typescript-eslint/space-before-blocks": "off",
+        "no-useless-catch": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "no-await-in-loop": "off",
+        "no-restricted-syntax": "off",
+        "consistent-return": "off",
+        "array-callback-return": "off"
+    },
+    "settings": {
+        "import/extensions": "off"
+    }
+}
