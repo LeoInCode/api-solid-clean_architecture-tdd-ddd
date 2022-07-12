@@ -32,7 +32,8 @@
         "no-await-in-loop": "off",
         "no-restricted-syntax": "off",
         "consistent-return": "off",
-        "array-callback-return": "off"
+        "array-callback-return": "off",
+        "max-classes-per-file": "off"
     },
     "settings": {
         "import/extensions": "off"
