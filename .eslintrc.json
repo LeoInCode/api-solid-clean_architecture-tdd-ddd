@@ -34,7 +34,8 @@
         "consistent-return": "off",
         "array-callback-return": "off",
         "max-classes-per-file": "off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "no-promise-executor-return": "off"
     },
     "settings": {
         "import/extensions": "off"
