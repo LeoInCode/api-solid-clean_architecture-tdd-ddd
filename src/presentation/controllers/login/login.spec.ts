@@ -2,6 +2,7 @@ import { HttpRequest, Authentication, EmailValidator } from './login-protocols';
 import { LoginController } from './login';
 import {
   badRequest,
+  ok,
   serverError,
   unauthorized,
 } from '../../helpers/http-helper';
@@ -120,5 +121,11 @@ describe('Login Controller', () => {
       );
     const httpReponse = await sut.handle(mekeFakeRequest());
     expect(httpReponse).toEqual(serverError(new Error()));
+  });
+
+  test('Should return 200 if valid credentials are provided', async () => {
+    const { sut } = makeSut();
+    const httpResponse = await sut.handle(mekeFakeRequest());
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }));
   });
 });
