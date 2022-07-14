@@ -11,6 +11,7 @@ import {
   HttpResponse,
   EmailValidator,
   Authentication,
+  Validation,
 } from './login-protocols';
 
 export class LoginController implements Controller {
@@ -18,13 +19,21 @@ export class LoginController implements Controller {
 
   private readonly authentication: Authentication;
 
-  constructor(emailValidator: EmailValidator, authentication: Authentication) {
+  private readonly validation: Validation;
+
+  constructor(
+    emailValidator: EmailValidator,
+    authentication: Authentication,
+    validation: Validation,
+  ) {
     this.emailValidator = emailValidator;
     this.authentication = authentication;
+    this.validation = validation;
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
+      this.validation.validate(httpRequest.body);
       const requiredFields = ['email', 'password'];
       for (const field of requiredFields) {
         if (!httpRequest.body[field]) {
