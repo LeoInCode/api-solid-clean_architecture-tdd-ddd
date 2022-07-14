@@ -1,8 +1,8 @@
 import { MissingParamError } from '../../errors';
-import { RequiredFieldName } from './required-field-validation';
+import { RequiredFielValidation } from './required-field-validation';
 
-const makeSut = (): RequiredFieldName => {
-  return new RequiredFieldName('any_field');
+const makeSut = (): RequiredFielValidation => {
+  return new RequiredFielValidation('any_field');
 };
 
 describe('RequiredField Validation', () => {
