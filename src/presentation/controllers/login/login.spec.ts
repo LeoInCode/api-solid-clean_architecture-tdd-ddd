@@ -1,5 +1,4 @@
-import { HttpRequest } from '../../protocols/http';
-import { EmailValidator } from '../../protocols/email-validator';
+import { HttpRequest, Authentication, EmailValidator } from './login-protocols';
 import { LoginController } from './login';
 import {
   badRequest,
@@ -7,7 +6,6 @@ import {
   unauthorized,
 } from '../../helpers/http-helper';
 import { InvalidParamError, MissingParamError } from '../../errors';
-import { Authentication } from '../../../domain/usecases/authentication';
 
 const mekeFakeRequest = (): HttpRequest => ({
   body: {
