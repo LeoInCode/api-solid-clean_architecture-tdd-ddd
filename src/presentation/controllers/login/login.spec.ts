@@ -1,7 +1,7 @@
 import { HttpRequest } from '../../protocols/http';
 import { EmailValidator } from '../../protocols/email-validator';
 import { LoginController } from './login';
-import { badRequest } from '../../helpers/http-helper';
+import { badRequest, serverError } from '../../helpers/http-helper';
 import { InvalidParamError, MissingParamError } from '../../errors';
 
 const mekeFakeRequest = (): HttpRequest => ({
@@ -69,5 +69,14 @@ describe('Login Controller', () => {
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false);
     const httpResponse = await sut.handle(mekeFakeRequest());
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('password')));
+  });
+
+  test('Should return 500 if EmailValidator throws', async () => {
+    const { sut, emailValidatorStub } = makeSut();
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const httpReponse = await sut.handle(mekeFakeRequest());
+    expect(httpReponse).toEqual(serverError(new Error()));
   });
 });
