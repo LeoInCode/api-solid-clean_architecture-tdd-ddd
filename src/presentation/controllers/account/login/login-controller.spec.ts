@@ -9,8 +9,8 @@ import {
   ok,
   serverError,
   unauthorized,
-} from '../../helpers/http/http-helper';
-import { MissingParamError } from '../../errors';
+} from '../../../helpers/http/http-helper';
+import { MissingParamError } from '../../../errors';
 import { Validation } from '../signup/signup-controller-protocols';
 
 const makeFakeRequest = (): HttpRequest => ({
