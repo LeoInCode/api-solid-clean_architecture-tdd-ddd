@@ -1,6 +1,6 @@
 {
   "name": "solid-clean_architecture-tdd-ddd",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Projeto desenvolvido seguindo o curso do Rodrigo Mango",
   "main": "index.js",
   "scripts": {
