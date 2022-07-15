@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Collection, MongoClient } from 'mongodb';
+import { Collection, MongoClient, ObjectId } from 'mongodb';
 
 export const MongoHelper = {
   client: null as MongoClient,
@@ -25,5 +25,9 @@ export const MongoHelper = {
     }
     const { _id, ...collectionWithoudId } = collection;
     return Object.assign({}, collectionWithoudId, { id: _id });
+  },
+
+  parseToObjectId(value: string): ObjectId {
+    return new ObjectId(value);
   },
 };

@@ -1,3 +1,4 @@
+import { UpdateAccessTokenRepository } from '../../../../data/protocols/db/update-access-token-repository';
 import { AccountModel } from '../../../../domain/models/account';
 import { AddAccountModel } from '../../../../domain/usecases/add-account';
 import { AddAccountRepository } from '../../../../data/protocols/db/add-account-respository';
@@ -5,7 +6,10 @@ import { MongoHelper } from '../helpers/mongo-helper';
 import { LoadAccountByEmailRepository } from '../../../../data/protocols/db/load-account-by-email-repository';
 
 export class AccountMongoRepository
-  implements AddAccountRepository, LoadAccountByEmailRepository
+  implements
+    AddAccountRepository,
+    LoadAccountByEmailRepository,
+    UpdateAccessTokenRepository
 {
   async add(accountData: AddAccountModel): Promise<AccountModel> {
     const accountCollection = MongoHelper.getCollection('accounts');
@@ -21,5 +25,18 @@ export class AccountMongoRepository
     const accountCollection = MongoHelper.getCollection('accounts');
     const account = await accountCollection.findOne({ email });
     return account && MongoHelper.map(account);
+  }
+
+  async updateAccessToken(id: string, token: string): Promise<void> {
+    const accountCollection = MongoHelper.getCollection('accounts');
+    const objectId = MongoHelper.parseToObjectId(id);
+    await accountCollection.updateOne(
+      { _id: objectId },
+      {
+        $set: {
+          accessToken: token,
+        },
+      },
+    );
   }
 }
