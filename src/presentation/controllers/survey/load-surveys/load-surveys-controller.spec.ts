@@ -6,6 +6,7 @@ import { LoadSurveysController } from './load-surveys-controller';
 const makeFakeSurveys = (): SurveyModel[] => {
   return [
     {
+      id: 'any_id',
       question: 'any_question',
       answers: [
         {
@@ -16,6 +17,7 @@ const makeFakeSurveys = (): SurveyModel[] => {
       date: new Date(),
     },
     {
+      id: 'any_id',
       question: 'other_question',
       answers: [
         {
