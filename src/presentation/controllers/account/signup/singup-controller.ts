@@ -1,4 +1,4 @@
-import { EmailInUseError } from '../../../errors/email-in-use-error';
+import { EmailInUseError } from '@/presentation/errors/email-in-use-error';
 import {
   HttpResponse,
   HttpRequest,

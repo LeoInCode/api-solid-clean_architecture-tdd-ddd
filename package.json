@@ -4,7 +4,8 @@
   "description": "Projeto desenvolvido seguindo o curso do Rodrigo Mango",
   "main": "index.js",
   "scripts": {
-    "start": "sucrase-node src/main/server.ts",
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest --passWithNoTests --runInBand --no-cache",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
@@ -38,6 +39,7 @@
     "lint-staged": "^13.0.3",
     "mockdate": "^3.0.5",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
     "sucrase": "^3.24.0",
     "supertest": "^6.2.4",
     "ts-jest": "^28.0.6",
@@ -57,8 +59,15 @@
     "express": "^4.18.1",
     "fast-glob": "^3.2.11",
     "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
     "mongodb": "^4.8.0",
     "ts-node": "^10.9.1",
     "validator": "^13.7.0"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }

@@ -1,6 +1,3 @@
-import { EmailInUseError } from '../../../errors/email-in-use-error';
-import { SignUpController } from './singup-controller';
-import { MissingParamError } from '../../../errors';
 import {
   AccountModel,
   AddAccount,
@@ -10,12 +7,14 @@ import {
   HttpRequest,
   Validation,
 } from './signup-controller-protocols';
+import { SignUpController } from './singup-controller';
+import { MissingParamError, EmailInUseError } from '@/presentation/errors';
 import {
   ok,
   badRequest,
   serverError,
   forbidden,
-} from '../../../helpers/http/http-helper';
+} from '@/presentation/helpers/http/http-helper';
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {

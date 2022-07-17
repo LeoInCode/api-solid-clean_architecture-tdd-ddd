@@ -3,14 +3,14 @@ import {
   serverError,
   badRequest,
   noContent,
-} from '../../../helpers/http/http-helper';
-import { AddSurveyController } from './add-suervey-controller';
+} from '@/presentation/helpers/http/http-helper';
 import {
   AddSurvey,
   AddSurveyModel,
   HttpRequest,
   Validation,
 } from './add-survey-controller-protocols';
+import { AddSurveyController } from './add-suervey-controller';
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {

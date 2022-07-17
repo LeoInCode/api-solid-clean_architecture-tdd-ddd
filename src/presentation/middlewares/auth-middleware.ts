@@ -1,5 +1,9 @@
-import { serverError, forbidden, ok } from '../helpers/http/http-helper';
-import { AccessDeniedError } from '../errors';
+import {
+  serverError,
+  forbidden,
+  ok,
+} from '@/presentation/helpers/http/http-helper';
+import { AccessDeniedError } from '@/presentation/errors';
 import {
   LoadAccountByToken,
   HttpRequest,
