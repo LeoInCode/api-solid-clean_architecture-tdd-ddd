@@ -22,13 +22,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
         returnDocument: 'after',
       },
     );
-    if (res.value) {
-      return MongoHelper.map(res.value);
-    }
-    const result = await surveyResultCollection.findOne({
-      _id: res.lastErrorObject?.upserted,
-    });
 
-    return MongoHelper.map(result);
+    return MongoHelper.map(res.value);
   }
 }
