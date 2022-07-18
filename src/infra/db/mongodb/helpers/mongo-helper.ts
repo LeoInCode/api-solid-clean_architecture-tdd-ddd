@@ -27,6 +27,10 @@ export const MongoHelper = {
     return Object.assign({}, collectionWithoudId, { id: _id });
   },
 
+  mapCollection: (collection: any[]): any[] => {
+    return collection.map((c) => MongoHelper.map(c));
+  },
+
   parseToObjectId(value: string): ObjectId {
     return new ObjectId(value);
   },
