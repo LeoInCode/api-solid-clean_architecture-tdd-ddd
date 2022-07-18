@@ -76,4 +76,14 @@ describe('Account Mongo Repository', () => {
       expect(surveys.length).toBe(0);
     });
   });
+
+  describe('loadById()', () => {
+    test('Should load survey by id on success', async () => {
+      const sut = makeSut();
+      const surveys = makeFakeSurveys();
+      const res = await surveyCollection.insertOne(surveys[0]);
+      const survey = await sut.loadById(res.insertedId.toHexString());
+      expect(survey).toBeTruthy();
+    });
+  });
 });
