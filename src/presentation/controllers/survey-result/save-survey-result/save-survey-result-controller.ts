@@ -1,6 +1,7 @@
 import { InvalidParamError } from '@/presentation/errors';
 import {
   forbidden,
+  ok,
   serverError,
 } from '@/presentation/helpers/http/http-helper';
 import {
@@ -28,16 +29,16 @@ export class SaveSarveyResultController implements Controller {
         if (!answers.includes(answer)) {
           return forbidden(new InvalidParamError('answer'));
         }
-        await this.saveSurveyResult.save({
-          accountId,
-          surveyId,
-          answer,
-          date: new Date(),
-        });
       } else {
         return forbidden(new InvalidParamError('surveyId'));
       }
-      return null;
+      const surveyResult = await this.saveSurveyResult.save({
+        accountId,
+        surveyId,
+        answer,
+        date: new Date(),
+      });
+      return ok(surveyResult);
     } catch (error) {
       return serverError(error);
     }
