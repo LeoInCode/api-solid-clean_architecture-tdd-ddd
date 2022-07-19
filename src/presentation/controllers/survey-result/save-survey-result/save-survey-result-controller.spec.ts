@@ -10,7 +10,7 @@ import {
   LoadSurveyById,
   SurveyModel,
   SaveSurveyResult,
-  SaveSurveyResultModel,
+  SaveSurveyResulParams,
   SurveyResultModel,
 } from './save-survey-result-controller-protocols';
 import { SaveSarveyResultController } from './save-survey-result-controller';
@@ -56,7 +56,7 @@ const makeFakeSurveyResult = (): SurveyResultModel => ({
 
 const makeSaveSurveyResultStub = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
-    async save(data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    async save(data: SaveSurveyResulParams): Promise<SurveyResultModel> {
       return new Promise((resolve) => resolve(makeFakeSurveyResult()));
     }
   }
