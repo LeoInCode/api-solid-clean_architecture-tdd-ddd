@@ -3,12 +3,13 @@ import { MongoHelper } from '../helpers/mongo-helper';
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository';
 import { SurveyModel } from '@/domain/models/survey';
 import { AccountModel } from '@/domain/models/account';
+import { mockAddAccountParams } from '@/domain/test';
 
 let surveyCollection: Collection;
 let surveyResultCollection: Collection;
 let accountCollection: Collection;
 
-const makeSurvey = async (): Promise<SurveyModel> => {
+const mockSurvey = async (): Promise<SurveyModel> => {
   const res = await surveyCollection.insertOne({
     question: 'any_question',
     answers: [
@@ -26,12 +27,8 @@ const makeSurvey = async (): Promise<SurveyModel> => {
   return MongoHelper.map(survey);
 };
 
-const makeAccount = async (): Promise<AccountModel> => {
-  const res = await accountCollection.insertOne({
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_password',
-  });
+const mockAccount = async (): Promise<AccountModel> => {
+  const res = await accountCollection.insertOne(mockAddAccountParams());
   const account = await accountCollection.findOne({ _id: res.insertedId });
   return MongoHelper.map(account);
 };
@@ -61,8 +58,8 @@ describe('Survey Reuult Mongo Repository', () => {
   describe('save()', () => {
     test('Should add a survey result if its new', async () => {
       const sut = makeSut();
-      const survey = await makeSurvey();
-      const account = await makeAccount();
+      const survey = await mockSurvey();
+      const account = await mockAccount();
       const surveyResult = await sut.save({
         surveyId: survey.id,
         accountId: account.id,
@@ -77,8 +74,8 @@ describe('Survey Reuult Mongo Repository', () => {
 
     test('Should update survey result if its not new', async () => {
       const sut = makeSut();
-      const survey = await makeSurvey();
-      const account = await makeAccount();
+      const survey = await mockSurvey();
+      const account = await mockAccount();
       const res = await surveyResultCollection.insertOne({
         surveyId: survey.id,
         accountId: account.id,

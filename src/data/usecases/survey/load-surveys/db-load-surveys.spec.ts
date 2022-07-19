@@ -1,45 +1,8 @@
 import MockDate from 'mockdate';
+import { mockSurveyModels, throwError } from '@/domain/test';
 import { DbLoadSurveys } from './db-load-surveys';
-import {
-  LoadSurveysRepository,
-  SurveyModel,
-} from './db-load-surveys-protocols';
-
-const makeFakeSurveys = (): SurveyModel[] => {
-  return [
-    {
-      id: 'any_id',
-      question: 'any_question',
-      answers: [
-        {
-          image: 'any_image',
-          answer: 'any_answer',
-        },
-      ],
-      date: new Date(),
-    },
-    {
-      id: 'any_id',
-      question: 'other_question',
-      answers: [
-        {
-          image: 'other_image',
-          answer: 'other_answer',
-        },
-      ],
-      date: new Date(),
-    },
-  ];
-};
-
-const makeLoadSurveysRepository = (): LoadSurveysRepository => {
-  class LoadSurveysRepositoryStub implements LoadSurveysRepository {
-    async loadAll(): Promise<SurveyModel[]> {
-      return new Promise((resolve) => resolve(makeFakeSurveys()));
-    }
-  }
-  return new LoadSurveysRepositoryStub();
-};
+import { LoadSurveysRepository } from './db-load-surveys-protocols';
+import { mockLoadSurveysRepository } from '@/data/test/mock-db-survey';
 
 type SutTypes = {
   sut: DbLoadSurveys;
@@ -47,7 +10,7 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
-  const loadSurveysRepositoryStub = makeLoadSurveysRepository();
+  const loadSurveysRepositoryStub = mockLoadSurveysRepository();
   const sut = new DbLoadSurveys(loadSurveysRepositoryStub);
   return {
     sut,
@@ -73,16 +36,14 @@ describe('DbLoadSurveys UseCase', () => {
   test('Should return a list of Surveys on success', async () => {
     const { sut } = makeSut();
     const surveys = await sut.load();
-    expect(surveys).toEqual(makeFakeSurveys());
+    expect(surveys).toEqual(mockSurveyModels());
   });
 
   test('Should throw if LoadSurveysRepository throww', async () => {
     const { sut, loadSurveysRepositoryStub } = makeSut();
     jest
       .spyOn(loadSurveysRepositoryStub, 'loadAll')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error())),
-      );
+      .mockImplementationOnce(throwError);
     const account = sut.load();
     expect(account).rejects.toThrow();
   });

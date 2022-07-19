@@ -1,32 +1,8 @@
 import MockDate from 'mockdate';
-import {
-  SurveyModel,
-  LoadSurveyByIdRepository,
-} from './load-survey-by-id-protocols';
+import { LoadSurveyByIdRepository } from './load-survey-by-id-protocols';
 import { DbLoadSurveyById } from './db-load-survey-by-id';
-
-const makeFakeSurvey = (): SurveyModel => {
-  return {
-    id: 'any_id',
-    question: 'any_question',
-    answers: [
-      {
-        image: 'any_image',
-        answer: 'any_answer',
-      },
-    ],
-    date: new Date(),
-  };
-};
-
-const makeLoadSurveyByIdRepository = (): LoadSurveyByIdRepository => {
-  class LoadSurveyByIdRepositoryStub implements LoadSurveyByIdRepository {
-    async loadById(id: string): Promise<SurveyModel> {
-      return new Promise((resolve) => resolve(makeFakeSurvey()));
-    }
-  }
-  return new LoadSurveyByIdRepositoryStub();
-};
+import { mockSurveyModel, throwError } from '@/domain/test';
+import { mockLoadSurveyByIdRepository } from '@/data/test/mock-db-survey';
 
 type SutTypes = {
   sut: DbLoadSurveyById;
@@ -34,7 +10,7 @@ type SutTypes = {
 };
 
 const makeSut = (): SutTypes => {
-  const loadSurveyByIdRepositoryStub = makeLoadSurveyByIdRepository();
+  const loadSurveyByIdRepositoryStub = mockLoadSurveyByIdRepository();
   const sut = new DbLoadSurveyById(loadSurveyByIdRepositoryStub);
   return {
     sut,
@@ -61,16 +37,14 @@ describe('DbLoadSurveyById UseCase', () => {
   test('Should return Survey on success', async () => {
     const { sut } = makeSut();
     const surveys = await sut.loadById('any_id');
-    expect(surveys).toEqual(makeFakeSurvey());
+    expect(surveys).toEqual(mockSurveyModel());
   });
 
   test('Should throw if LoadSurveyByIdRepository throww', async () => {
     const { sut, loadSurveyByIdRepositoryStub } = makeSut();
     jest
       .spyOn(loadSurveyByIdRepositoryStub, 'loadById')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error())),
-      );
+      .mockImplementationOnce(throwError);
     const account = sut.loadById('any_id');
     expect(account).rejects.toThrow();
   });
