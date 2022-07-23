@@ -66,19 +66,20 @@ describe('Survey Reuult Mongo Repository', () => {
         answer: survey.answers[0].answer,
         date: new Date(),
       });
-
       expect(surveyResult).toBeTruthy();
-      expect(surveyResult.id).toBeTruthy();
-      expect(surveyResult.answer).toBe(survey.answers[0].answer);
+      expect(surveyResult.surveyId).toEqual(survey.id);
+      expect(surveyResult.answers[0].answer).toBe(survey.answers[0].answer);
+      expect(surveyResult.answers[0].count).toBe(1);
+      expect(surveyResult.answers[0].percent).toBe(100);
     });
 
     test('Should update survey result if its not new', async () => {
       const sut = makeSut();
       const survey = await mockSurvey();
       const account = await mockAccount();
-      const res = await surveyResultCollection.insertOne({
-        surveyId: survey.id,
-        accountId: account.id,
+      await surveyResultCollection.insertOne({
+        surveyId: MongoHelper.parseToObjectId(survey.id),
+        accountId: MongoHelper.parseToObjectId(account.id),
         answer: survey.answers[0].answer,
         date: new Date(),
       });
@@ -88,10 +89,11 @@ describe('Survey Reuult Mongo Repository', () => {
         answer: survey.answers[1].answer,
         date: new Date(),
       });
-
       expect(surveyResult).toBeTruthy();
-      expect(surveyResult.id).toEqual(res.insertedId);
-      expect(surveyResult.answer).toBe(survey.answers[1].answer);
+      expect(surveyResult.surveyId).toEqual(survey.id);
+      expect(surveyResult.answers[0].answer).toBe(survey.answers[1].answer);
+      expect(surveyResult.answers[0].count).toBe(1);
+      expect(surveyResult.answers[0].percent).toBe(100);
     });
   });
 });
