@@ -2,7 +2,7 @@ import MockDate from 'mockdate';
 import { mockSurveyModels, throwError } from '@/domain/test';
 import { DbLoadSurveys } from './db-load-surveys';
 import { LoadSurveysRepository } from './db-load-surveys-protocols';
-import { mockLoadSurveysRepository } from '@/data/test/mock-db-survey';
+import { mockLoadSurveysRepository } from '@/data/test';
 
 type SutTypes = {
   sut: DbLoadSurveys;
