@@ -22,16 +22,16 @@ export class QueryBuilder {
     return this;
   }
 
-  lookup(data: object): QueryBuilder {
+  sort(data: object): QueryBuilder {
     this.query.push({
-      $lookup: data,
+      $sort: data,
     });
     return this;
   }
 
-  addFields(data: object): QueryBuilder {
+  lookup(data: object): QueryBuilder {
     this.query.push({
-      $addFields: data,
+      $lookup: data,
     });
     return this;
   }
