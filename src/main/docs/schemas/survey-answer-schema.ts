@@ -4,8 +4,9 @@ export const surveyAnswerSchema = {
     image: {
       type: 'string',
     },
-    answers: {
+    answer: {
       type: 'string',
     },
   },
+  required: ['answer'],
 };

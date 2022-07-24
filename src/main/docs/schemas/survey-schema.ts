@@ -7,7 +7,7 @@ export const surveySchema = {
     question: {
       type: 'string',
     },
-    answer: {
+    answers: {
       type: 'array',
       items: {
         $ref: '#/schemas/surveyAnswer',
@@ -17,4 +17,5 @@ export const surveySchema = {
       type: 'string',
     },
   },
+  required: ['id', 'question', 'answers', 'date'],
 };
