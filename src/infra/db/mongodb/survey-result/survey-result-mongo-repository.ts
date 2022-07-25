@@ -1,9 +1,12 @@
 import { SurveyResultModel } from '@/domain/models/survey-result';
 import { SaveSurveyResulParams } from '@/domain/usecases/survey-result/save-survey-result';
 import { SaveSurveyResultRepository } from '@/data/usecases/survey-result/save-survey-result/db-save-survey-result-protocols';
+import { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/load-survey-result-repository';
 import { MongoHelper, QueryBuilder } from '../helpers';
 
-export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
+export class SurveyResultMongoRepository
+  implements SaveSurveyResultRepository, LoadSurveyResultRepository
+{
   async save(data: SaveSurveyResulParams): Promise<SurveyResultModel> {
     const surveyResultCollection = MongoHelper.getCollection('surveyResults');
     const res = await surveyResultCollection.findOneAndUpdate(
@@ -25,7 +28,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
     return surveyResult;
   }
 
-  private async loadBySurveyId(surveyId: string): Promise<SurveyResultModel> {
+  async loadBySurveyId(surveyId: string): Promise<SurveyResultModel> {
     const surveyResultCollection = MongoHelper.getCollection('surveyResults');
     const query = new QueryBuilder()
       .match({
