@@ -1,9 +1,10 @@
 import { Collection } from 'mongodb';
-import { MongoHelper } from '../helpers/mongo-helper';
-import { SurveyResultMongoRepository } from './survey-result-mongo-repository';
 import { SurveyModel } from '@/domain/models/survey';
 import { AccountModel } from '@/domain/models/account';
 import { mockAddAccountParams } from '@/domain/test';
+import { SurveyResultModel } from '@/domain/models/survey-result';
+import { SurveyResultMongoRepository } from './survey-result-mongo-repository';
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper';
 
 let surveyCollection: Collection;
 let surveyResultCollection: Collection;
@@ -63,19 +64,17 @@ describe('Survey Reuult Mongo Repository', () => {
       const sut = makeSut();
       const survey = await mockSurvey();
       const account = await mockAccount();
-      const surveyResult = await sut.save({
+      await sut.save({
         surveyId: survey.id,
         accountId: account.id,
         answer: survey.answers[0].answer,
         date: new Date(),
       });
+      const surveyResult = await surveyResultCollection.findOne({
+        surveyId: MongoHelper.parseToObjectId(survey.id),
+        accountId: MongoHelper.parseToObjectId(account.id),
+      });
       expect(surveyResult).toBeTruthy();
-      expect(surveyResult.surveyId).toEqual(survey.id);
-      expect(surveyResult.answers[0].answer).toBe(survey.answers[0].answer);
-      expect(surveyResult.answers[0].count).toBe(1);
-      expect(surveyResult.answers[0].percent).toBe(100);
-      expect(surveyResult.answers[1].count).toBe(0);
-      expect(surveyResult.answers[1].percent).toBe(0);
     });
 
     test('Should update survey result if its not new', async () => {
@@ -88,19 +87,20 @@ describe('Survey Reuult Mongo Repository', () => {
         answer: survey.answers[0].answer,
         date: new Date(),
       });
-      const surveyResult = await sut.save({
+      await sut.save({
         surveyId: survey.id,
         accountId: account.id,
         answer: survey.answers[1].answer,
         date: new Date(),
       });
+      const surveyResult = await surveyResultCollection
+        .find({
+          surveyId: MongoHelper.parseToObjectId(survey.id),
+          accountId: MongoHelper.parseToObjectId(account.id),
+        })
+        .toArray();
       expect(surveyResult).toBeTruthy();
-      expect(surveyResult.surveyId).toEqual(survey.id);
-      expect(surveyResult.answers[0].answer).toBe(survey.answers[1].answer);
-      expect(surveyResult.answers[0].count).toBe(1);
-      expect(surveyResult.answers[0].percent).toBe(100);
-      expect(surveyResult.answers[1].count).toBe(0);
-      expect(surveyResult.answers[1].percent).toBe(0);
+      expect(surveyResult.length).toBe(1);
     });
   });
 
