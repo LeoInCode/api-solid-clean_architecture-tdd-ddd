@@ -6,11 +6,12 @@ export const surveyResultPath = {
       },
     ],
     tags: ['Enquete'],
-    summary: 'Api para criar a resoista de uma enquete',
+    summary: 'Api para criar a resposta de uma enquete',
     parameters: [
       {
         in: 'path',
         name: 'surveyId',
+        description: 'ID da enquete a ser respondida',
         required: true,
         schema: {
           type: 'string',
@@ -26,6 +27,47 @@ export const surveyResultPath = {
         },
       },
     },
+    responses: {
+      200: {
+        description: 'Sucesso',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/schemas/surveyResult',
+            },
+          },
+        },
+      },
+      403: {
+        $ref: '#/components/forbidden',
+      },
+      404: {
+        $ref: '#/components/notFound',
+      },
+      500: {
+        $ref: '#/components/serverError',
+      },
+    },
+  },
+  get: {
+    security: [
+      {
+        apiKeyAuth: [],
+      },
+    ],
+    tags: ['Enquete'],
+    summary: 'Api para consultar o resultado de uma enquete',
+    parameters: [
+      {
+        in: 'path',
+        name: 'surveyId',
+        description: 'ID da enquete a ser respondida',
+        required: true,
+        schema: {
+          type: 'string',
+        },
+      },
+    ],
     responses: {
       200: {
         description: 'Sucesso',
