@@ -12,7 +12,7 @@ import {
   SaveSurveyResult,
 } from './save-survey-result-controller-protocols';
 
-export class SaveSarveyResultController implements Controller {
+export class SaveSurveyResultController implements Controller {
   constructor(
     private readonly loadSurveyById: LoadSurveyById,
     private readonly saveSurveyResult: SaveSurveyResult,

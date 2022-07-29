@@ -10,7 +10,7 @@ import {
   LoadSurveyById,
   SaveSurveyResult,
 } from './save-survey-result-controller-protocols';
-import { SaveSarveyResultController } from './save-survey-result-controller';
+import { SaveSurveyResultController } from './save-survey-result-controller';
 import { mockSurveyResultModel, throwError } from '@/domain/test';
 import {
   mockLoadSurveyById,
@@ -28,7 +28,7 @@ const mockRequest = (): HttpRequest => ({
 });
 
 type SutTypes = {
-  sut: SaveSarveyResultController;
+  sut: SaveSurveyResultController;
   loadSurveyByIdStub: LoadSurveyById;
   saveSurveyResultStub: SaveSurveyResult;
 };
@@ -36,7 +36,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const loadSurveyByIdStub = mockLoadSurveyById();
   const saveSurveyResultStub = mockSaveSurveyResultStub();
-  const sut = new SaveSarveyResultController(
+  const sut = new SaveSurveyResultController(
     loadSurveyByIdStub,
     saveSurveyResultStub,
   );
