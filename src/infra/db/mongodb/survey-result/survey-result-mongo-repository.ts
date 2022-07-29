@@ -188,8 +188,8 @@ export class SurveyResultMongoRepository
       .build();
 
     const surveyResult = await surveyResultCollection
-      .aggregate(query)
+      .aggregate<SurveyResultModel>(query)
       .toArray();
-    return surveyResult.length ? (surveyResult[0] as any) : null;
+    return surveyResult.length ? surveyResult[0] : null;
   }
 }
