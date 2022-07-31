@@ -17,7 +17,10 @@ export const mockSaveSurveyResultRepository =
 export const mockLoadSurveyResultRepository =
   (): LoadSurveyResultRepository => {
     class LoadSurveyResultRepositoryStub implements LoadSurveyResultRepository {
-      loadBySurveyId(surveyId: string): Promise<SurveyResultModel> {
+      loadBySurveyId(
+        surveyId: string,
+        accountId: string,
+      ): Promise<SurveyResultModel> {
         return Promise.resolve(mockSurveyResultModel());
       }
     }
