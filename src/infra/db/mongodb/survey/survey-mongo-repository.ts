@@ -1,3 +1,4 @@
+import { QueryBuilder } from '../helpers/query-builder';
 /* eslint-disable no-underscore-dangle */
 import { AddSurveyParams } from '@/domain/usecases/survey/add-survey';
 import { SurveyModel } from '@/domain/models/survey';
@@ -17,9 +18,42 @@ export class SurveyMongoRepository
     await surveyCollection.insertOne(surveyData);
   }
 
-  async loadAll(): Promise<SurveyModel[]> {
+  async loadAll(accountId: string): Promise<SurveyModel[]> {
     const surveyCollection = MongoHelper.getCollection('surveys');
-    const surveys: any = await surveyCollection.find().toArray();
+    const query = new QueryBuilder()
+      .lookup({
+        from: 'surveyResults',
+        foreignField: 'surveyId',
+        localField: '_id',
+        as: 'result',
+      })
+      .project({
+        _id: 1,
+        question: 1,
+        answers: 1,
+        date: 1,
+        didAnswer: {
+          $gte: [
+            {
+              $size: {
+                $filter: {
+                  input: '$result',
+                  as: 'item',
+                  cond: {
+                    $eq: [
+                      '$$item.accountId',
+                      MongoHelper.parseToObjectId(accountId),
+                    ],
+                  },
+                },
+              },
+            },
+            1,
+          ],
+        },
+      })
+      .build();
+    const surveys = await surveyCollection.aggregate(query).toArray();
     return MongoHelper.mapCollection(surveys);
   }
 
