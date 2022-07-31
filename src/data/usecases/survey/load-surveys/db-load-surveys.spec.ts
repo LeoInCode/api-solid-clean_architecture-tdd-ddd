@@ -29,13 +29,13 @@ describe('DbLoadSurveys UseCase', () => {
   test('Should call LoadSurveysRepository', async () => {
     const { sut, loadSurveysRepositoryStub } = makeSut();
     const loadAllSpy = jest.spyOn(loadSurveysRepositoryStub, 'loadAll');
-    await sut.load();
-    expect(loadAllSpy).toHaveBeenCalled();
+    await sut.load('any_id');
+    expect(loadAllSpy).toHaveBeenCalledWith('any_id');
   });
 
   test('Should return a list of Surveys on success', async () => {
     const { sut } = makeSut();
-    const surveys = await sut.load();
+    const surveys = await sut.load('any_id');
     expect(surveys).toEqual(mockSurveyModels());
   });
 
@@ -44,7 +44,7 @@ describe('DbLoadSurveys UseCase', () => {
     jest
       .spyOn(loadSurveysRepositoryStub, 'loadAll')
       .mockImplementationOnce(throwError);
-    const account = sut.load();
+    const account = sut.load('any_id');
     expect(account).rejects.toThrow();
   });
 });

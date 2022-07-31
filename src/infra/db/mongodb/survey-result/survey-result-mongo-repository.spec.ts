@@ -2,7 +2,6 @@ import { Collection } from 'mongodb';
 import { SurveyModel } from '@/domain/models/survey';
 import { AccountModel } from '@/domain/models/account';
 import { mockAddAccountParams } from '@/domain/test';
-import { SurveyResultModel } from '@/domain/models/survey-result';
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository';
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper';
 
