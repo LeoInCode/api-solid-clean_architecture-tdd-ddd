@@ -4,9 +4,8 @@ import {
   Controller,
   HttpRequest,
   HttpResponse,
-  LoadSurveyById,
-  LoadSurveyResult,
-} from './survey-result/load-survey-result/load-survey-result-controller-protocols';
+} from '@/presentation/protocols';
+import { LoadSurveyById, LoadSurveyResult } from '@/domain/usecases';
 
 export class LoadSurveyResultController implements Controller {
   constructor(

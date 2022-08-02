@@ -1,11 +1,9 @@
-import {
-  LoadAccountByToken,
-  HttpRequest,
-} from '@/presentation/middlewares/auth-middleware-protocols';
+import { HttpRequest } from '@/presentation/protocols';
 import { AccessDeniedError } from '@/presentation/errors';
-import { forbidden, ok, serverError } from '@/presentation/helpers/http-helper';
-import { AuthMiddleware } from '@/presentation/middlewares/auth-middleware';
-import { mockLoadAccontByToken } from '@/tests/presentation/mocks/mock-account';
+import { forbidden, ok, serverError } from '@/presentation/helpers';
+import { AuthMiddleware } from '@/presentation/middlewares';
+import { LoadAccountByToken } from '@/domain/usecases';
+import { mockLoadAccontByToken } from '@/tests/presentation/mocks';
 import { throwError } from '@/tests/domain/mocks';
 
 const mockRequest = (): HttpRequest => ({

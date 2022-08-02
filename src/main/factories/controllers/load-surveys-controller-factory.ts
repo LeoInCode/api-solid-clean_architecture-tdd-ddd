@@ -1,6 +1,6 @@
-import { makeDbLoadSurvey } from '@/main/factories/usecases/db-load-surveys-factory';
-import { makeLogControllerDecorator } from '@/main/factories/decorators/log-controller-decorator-factory';
-import { LoadSurveysController } from '@/presentation/controllers/load-surveys-controller';
+import { makeDbLoadSurvey } from '@/main/factories/usecases';
+import { makeLogControllerDecorator } from '@/main/factories/decorators';
+import { LoadSurveysController } from '@/presentation/controllers';
 import { Controller } from '@/presentation/protocols';
 
 export const makeLoadSurveyController = (): Controller => {

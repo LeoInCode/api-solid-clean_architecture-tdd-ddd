@@ -1,16 +1,13 @@
+import { LoginController } from '@/presentation/controllers';
+import { HttpRequest, Validation } from '@/presentation/protocols';
 import {
   badRequest,
   ok,
   serverError,
   unauthorized,
-} from '@/presentation/helpers/http-helper';
+} from '@/presentation/helpers';
 import { MissingParamError } from '@/presentation/errors';
-import {
-  HttpRequest,
-  Authentication,
-} from '@/presentation/controllers/account/login/login-controller-protocols';
-import { LoginController } from '@/presentation/controllers/login-controller';
-import { Validation } from '@/presentation/controllers/account/signup/signup-controller-protocols';
+import { Authentication } from '@/domain/usecases';
 import { mockAuthenticationModel, throwError } from '@/tests/domain/mocks';
 import { mockAuthentication, mockValidation } from '@/tests/presentation/mocks';
 

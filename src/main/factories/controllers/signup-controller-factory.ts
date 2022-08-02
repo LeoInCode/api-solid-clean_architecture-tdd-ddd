@@ -1,9 +1,11 @@
-import { makeLogControllerDecorator } from '@/main/factories/decorators/log-controller-decorator-factory';
-import { makeDbAddAccount } from '@/main/factories/usecases/db-add-account-factory';
-import { makeDbAuthentication } from '@/main/factories/usecases/db-authentication-factory';
-import { SignUpController } from '@/presentation/controllers/singup-controller';
+import { makeLogControllerDecorator } from '@/main/factories/decorators';
+import {
+  makeDbAddAccount,
+  makeDbAuthentication,
+} from '@/main/factories/usecases';
+import { makeSignUpValidation } from '@/main/factories/controllers';
+import { SignUpController } from '@/presentation/controllers';
 import { Controller } from '@/presentation/protocols';
-import { makeSignUpValidation } from './signup-validation-factory';
 
 export const makeSignUpController = (): Controller => {
   const signUpController = new SignUpController(

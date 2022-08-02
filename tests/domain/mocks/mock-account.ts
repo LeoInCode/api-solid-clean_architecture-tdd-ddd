@@ -1,9 +1,5 @@
-import { AddAccountParams } from '@/domain/usecases/add-account';
-import {
-  AuthenticationModel,
-  AuthenticationParams,
-} from '@/data/usecases/account/authentication/db-authentication-protocols';
-import { AccountModel } from '@/presentation/middlewares/auth-middleware-protocols';
+import { AccountModel, AuthenticationModel } from '@/domain/models';
+import { AddAccountParams, AuthenticationParams } from '@/domain/usecases';
 
 export const mockAddAccountParams = (): AddAccountParams => ({
   name: 'any_name',

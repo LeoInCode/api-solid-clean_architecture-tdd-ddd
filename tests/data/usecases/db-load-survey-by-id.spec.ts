@@ -1,6 +1,6 @@
 import MockDate from 'mockdate';
-import { LoadSurveyByIdRepository } from '@/data/usecases/survey/load-survey-by-id/load-survey-by-id-protocols';
-import { DbLoadSurveyById } from '@/data/usecases/db-load-survey-by-id';
+import { LoadSurveyByIdRepository } from '@/data/protocols';
+import { DbLoadSurveyById } from '@/data/usecases';
 import { mockSurveyModel, throwError } from '@/tests/domain/mocks';
 import { mockLoadSurveyByIdRepository } from '@/tests/data/mocks';
 

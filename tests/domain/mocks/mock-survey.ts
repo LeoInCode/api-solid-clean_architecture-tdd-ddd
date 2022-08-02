@@ -1,4 +1,4 @@
-import { SurveyModel } from '@/domain/models/survey';
+import { SurveyModel } from '@/domain/models';
 import { AddSurveyParams } from '@/domain/usecases';
 
 export const mockSurveyParams = (): AddSurveyParams => ({

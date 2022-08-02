@@ -1,23 +1,14 @@
-import {
-  AddAccount,
-  Authentication,
-  HttpRequest,
-  Validation,
-} from '@/presentation/controllers/account/signup/signup-controller-protocols';
-import { SignUpController } from '@/presentation/controllers/singup-controller';
-import { mockAuthenticationModel, throwError } from '@/tests/domain/mocks';
+import { HttpRequest, Validation } from '@/presentation/protocols';
+import { SignUpController } from '@/presentation/controllers';
 import { MissingParamError, EmailInUseError } from '@/presentation/errors';
-import {
-  ok,
-  badRequest,
-  serverError,
-  forbidden,
-} from '@/presentation/helpers/http-helper';
+import { ok, badRequest, serverError, forbidden } from '@/presentation/helpers';
+import { AddAccount, Authentication } from '@/domain/usecases';
 import {
   mockAddAccount,
   mockAuthentication,
   mockValidation,
 } from '@/tests/presentation/mocks';
+import { mockAuthenticationModel, throwError } from '@/tests/domain/mocks';
 
 const mockRequest = (): HttpRequest => ({
   body: {

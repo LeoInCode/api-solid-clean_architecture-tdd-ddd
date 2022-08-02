@@ -1,8 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Collection } from 'mongodb';
-import { SurveyMongoRepository } from '@/infra/db/mongodb/survey-mongo-repository';
-import { MongoHelper } from '@/infra/db';
-import { AccountModel } from '@/domain/models/account';
+import { AccountModel } from '@/domain/models';
+import { SurveyMongoRepository, MongoHelper } from '@/infra/db';
 import { mockAddAccountParams, mockSurveysParams } from '@/tests/domain/mocks';
 
 let surveyCollection: Collection;

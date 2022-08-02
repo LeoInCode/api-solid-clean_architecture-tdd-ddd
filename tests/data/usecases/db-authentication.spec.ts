@@ -1,10 +1,10 @@
-import { DbAuthentication } from '@/data/usecases/db-authentication';
+import { DbAuthentication } from '@/data/usecases';
 import {
   HashComparer,
   Encrypter,
   LoadAccountByEmailRepository,
   UpdateAccessTokenRepository,
-} from '@/data/usecases/account/authentication/db-authentication-protocols';
+} from '@/data/protocols';
 import {
   mockAccountModel,
   mockAuthenticationParams,

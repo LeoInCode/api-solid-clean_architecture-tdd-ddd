@@ -1,6 +1,8 @@
-import { makeDbSaveSurveyResult } from '@/main/factories/usecases/db-save-survey-result-factory';
-import { makeDbLoadSurveyById } from '@/main/factories/usecases/db-load-survey-by-id-factory';
-import { SaveSurveyResultController } from '@/presentation/controllers/save-survey-result-controller';
+import {
+  makeDbSaveSurveyResult,
+  makeDbLoadSurveyById,
+} from '@/main/factories/usecases';
+import { SaveSurveyResultController } from '@/presentation/controllers';
 import { Controller } from '@/presentation/protocols';
 
 export const makeSaveSurveyResultController = (): Controller => {

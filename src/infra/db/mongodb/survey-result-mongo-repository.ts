@@ -1,8 +1,10 @@
 import round from 'mongo-round';
-import { SurveyResultModel } from '@/domain/models/survey-result';
+import {
+  SaveSurveyResultRepository,
+  LoadSurveyResultRepository,
+} from '@/data/protocols';
+import { SurveyResultModel } from '@/domain/models';
 import { SaveSurveyResulParams } from '@/domain/usecases';
-import { SaveSurveyResultRepository } from '@/data/usecases/survey-result/save-survey-result/db-save-survey-result-protocols';
-import { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/load-survey-result-repository';
 import { MongoHelper, QueryBuilder } from '@/infra/db';
 
 export class SurveyResultMongoRepository

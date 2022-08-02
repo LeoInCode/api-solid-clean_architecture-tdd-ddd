@@ -1,11 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import { QueryBuilder } from './query-builder';
+import {
+  LoadSurveysRepository,
+  LoadSurveyByIdRepository,
+  AddSurveyRepository,
+} from '@/data/protocols';
 import { AddSurveyParams } from '@/domain/usecases';
 import { SurveyModel } from '@/domain/models';
-import { AddSurveyRepository } from '@/data/usecases/survey/add-survey/db-add-survey-protocols';
-import { LoadSurveysRepository } from '@/data/protocols/db/survey/load-surveys-repository';
-import { MongoHelper } from '@/infra/db';
-import { LoadSurveyByIdRepository } from '@/data/usecases/survey/load-survey-by-id/load-survey-by-id-protocols';
+import { MongoHelper, QueryBuilder } from '@/infra/db';
 
 export class SurveyMongoRepository
   implements

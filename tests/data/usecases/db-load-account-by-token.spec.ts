@@ -1,8 +1,5 @@
-import { DbLoadAccountByToken } from '@/data/usecases/db-load-account-by-token';
-import {
-  Decrypter,
-  LoadAccountByTokenRepository,
-} from '@/data/usecases/account/load-account-by-token/load-account-by-token-protocols';
+import { Decrypter, LoadAccountByTokenRepository } from '@/data/protocols';
+import { DbLoadAccountByToken } from '@/data/usecases';
 import {
   mockDecrypter,
   mockLoadAccountByTokenRepository,

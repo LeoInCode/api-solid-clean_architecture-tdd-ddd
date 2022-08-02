@@ -2,8 +2,8 @@ import {
   RequiredFielValidation,
   ValidationComposite,
 } from '@/validation/validators';
-import { Validation } from '@/presentation/protocols/validation';
-import { makeAddSurveyValidation } from '@/main/factories/controllers/add-survey-validation-factory';
+import { Validation } from '@/presentation/protocols';
+import { makeAddSurveyValidation } from '@/main/factories/controllers';
 
 jest.mock('@/validation/validators/validation-composite');
 

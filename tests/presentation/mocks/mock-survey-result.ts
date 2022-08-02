@@ -1,7 +1,10 @@
-import { SurveyResultModel } from '@/domain/models/survey-result';
+import { SurveyResultModel } from '@/domain/models';
+import {
+  LoadSurveyResult,
+  SaveSurveyResulParams,
+  SaveSurveyResult,
+} from '@/domain/usecases';
 import { mockSurveyResultModel } from '@/tests/domain/mocks';
-import { LoadSurveyResult } from '@/domain/usecases/load-survey-result';
-import { SaveSurveyResulParams, SaveSurveyResult } from '@/domain/usecases';
 
 export const mockSaveSurveyResultStub = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
