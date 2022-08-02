@@ -3,9 +3,5 @@
   "include": [
     "src"
   ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts",
-    "**/test/**"
-  ]
+  "exclude": ["tests"]
 }
