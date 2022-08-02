@@ -1,4 +1,4 @@
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper';
+import { MongoHelper } from '@/infra/db';
 
 describe('Mongo Helper', () => {
   test('Should return null on map if a collection was null', () => {

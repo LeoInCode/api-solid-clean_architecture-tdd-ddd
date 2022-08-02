@@ -1,8 +1,4 @@
-import {
-  serverError,
-  forbidden,
-  ok,
-} from '@/presentation/helpers/http/http-helper';
+import { serverError, forbidden, ok } from '@/presentation/helpers/http-helper';
 import { AccessDeniedError } from '@/presentation/errors';
 import {
   LoadAccountByToken,

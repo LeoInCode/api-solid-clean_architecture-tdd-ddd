@@ -1,7 +1,7 @@
 import { LoadAccountByEmailRepository } from '@/data/protocols/db/account/load-account-by-email-repository';
 import { AddAccountRepository } from '@/data/protocols/db/account/add-account-respository';
 import { Hasher } from '@/data/protocols/criptography/hasher';
-import { DbAddAccount } from '@/data/usecases/account/add-account/db-add-account';
+import { DbAddAccount } from '@/data/usecases/db-add-account';
 
 import {
   mockAccountModel,

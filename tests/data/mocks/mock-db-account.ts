@@ -2,7 +2,7 @@ import { UpdateAccessTokenRepository } from '@/data/protocols/db/account/update-
 import { LoadAccountByTokenRepository } from '@/data/protocols/db/account/load-account-by-token-repository';
 import { LoadAccountByEmailRepository } from '@/data/protocols/db/account/load-account-by-email-repository';
 import { AddAccountRepository } from '@/data/protocols/db/account/add-account-respository';
-import { AddAccountParams } from '@/domain/usecases/account/add-account';
+import { AddAccountParams } from '@/domain/usecases/add-account';
 import { AccountModel } from '@/domain/models/account';
 import { mockAccountModel } from '@/tests/domain/mocks';
 

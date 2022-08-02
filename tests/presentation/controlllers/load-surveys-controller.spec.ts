@@ -1,16 +1,12 @@
 import MockDate from 'mockdate';
-import {
-  noContent,
-  ok,
-  serverError,
-} from '@/presentation/helpers/http/http-helper';
+import { noContent, ok, serverError } from '@/presentation/helpers/http-helper';
 import { mockLoadSurveys } from '@/tests/presentation/mocks';
 import { mockSurveyModels, throwError } from '@/tests/domain/mocks';
 import {
   LoadSurveys,
   HttpRequest,
 } from '@/presentation/controllers/survey/load-surveys/load-survey-controller-protocols';
-import { LoadSurveysController } from '@/presentation/controllers/survey/load-surveys/load-surveys-controller';
+import { LoadSurveysController } from '@/presentation/controllers/load-surveys-controller';
 
 const mockRequest = (): HttpRequest => ({ accountId: 'any_account_id' });
 

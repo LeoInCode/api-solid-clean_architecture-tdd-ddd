@@ -3,7 +3,7 @@ import {
   LoadSurveyResultRepository,
   LoadSurveyByIdRepository,
 } from '@/data/usecases/survey-result/load-survey-result/db-load-survey-result-protocols';
-import { DbLoadSurveyResult } from '@/data/usecases/survey-result/load-survey-result/db-load-survey-result';
+import { DbLoadSurveyResult } from '@/data/usecases/db-load-survey-result';
 import {
   mockLoadSurveyByIdRepository,
   mockLoadSurveyResultRepository,

@@ -1,7 +1,7 @@
 import { LogErrorRepository } from '@/data/protocols/db/log/log-error-repository';
 import { mockLogErrorRepository } from '@/tests/data/mocks';
 import { mockAccountModel } from '@/tests/domain/mocks';
-import { ok, serverError } from '@/presentation/helpers/http/http-helper';
+import { ok, serverError } from '@/presentation/helpers/http-helper';
 import {
   Controller,
   HttpRequest,

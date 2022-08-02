@@ -4,7 +4,7 @@ import {
   HttpRequest,
   Validation,
 } from '@/presentation/controllers/account/signup/signup-controller-protocols';
-import { SignUpController } from '@/presentation/controllers/account/signup/singup-controller';
+import { SignUpController } from '@/presentation/controllers/singup-controller';
 import { mockAuthenticationModel, throwError } from '@/tests/domain/mocks';
 import { MissingParamError, EmailInUseError } from '@/presentation/errors';
 import {
@@ -12,7 +12,7 @@ import {
   badRequest,
   serverError,
   forbidden,
-} from '@/presentation/helpers/http/http-helper';
+} from '@/presentation/helpers/http-helper';
 import {
   mockAddAccount,
   mockAuthentication,

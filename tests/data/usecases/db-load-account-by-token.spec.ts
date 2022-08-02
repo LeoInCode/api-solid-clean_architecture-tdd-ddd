@@ -1,4 +1,4 @@
-import { DbLoadAccountByToken } from '@/data/usecases/account/load-account-by-token/db-load-account-by-token';
+import { DbLoadAccountByToken } from '@/data/usecases/db-load-account-by-token';
 import {
   Decrypter,
   LoadAccountByTokenRepository,

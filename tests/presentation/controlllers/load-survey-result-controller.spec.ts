@@ -4,16 +4,12 @@ import {
   LoadSurveyById,
   LoadSurveyResult,
 } from '@/presentation/controllers/survey-result/load-survey-result/load-survey-result-controller-protocols';
-import { LoadSurveyResultController } from '@/presentation/controllers/survey-result/load-survey-result/load-survey-result-controller';
+import { LoadSurveyResultController } from '@/presentation/controllers/load-survey-result-controller';
 import {
   mockLoadSurveyById,
   mockLoadSurveyResult,
 } from '@/tests/presentation/mocks';
-import {
-  forbidden,
-  ok,
-  serverError,
-} from '@/presentation/helpers/http/http-helper';
+import { forbidden, ok, serverError } from '@/presentation/helpers/http-helper';
 import { InvalidParamError } from '@/presentation/errors';
 import { throwError, mockSurveyResultModel } from '@/tests/domain/mocks';
 

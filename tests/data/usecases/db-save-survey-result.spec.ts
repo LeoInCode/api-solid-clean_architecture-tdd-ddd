@@ -4,7 +4,7 @@ import {
   mockSurveyResultParams,
   throwError,
 } from '@/tests/domain/mocks';
-import { DbSaveSurveyResult } from '@/data/usecases/survey-result/save-survey-result/db-save-survey-result';
+import { DbSaveSurveyResult } from '@/data/usecases/db-save-survey-result';
 import {
   SaveSurveyResultRepository,
   LoadSurveyResultRepository,

@@ -3,13 +3,13 @@ import {
   serverError,
   badRequest,
   noContent,
-} from '@/presentation/helpers/http/http-helper';
+} from '@/presentation/helpers/http-helper';
 import {
   AddSurvey,
   HttpRequest,
   Validation,
 } from '@/presentation/controllers/survey/add-survey/add-survey-controller-protocols';
-import { AddSurveyController } from '@/presentation/controllers/survey/add-survey/add-suervey-controller';
+import { AddSurveyController } from '@/presentation/controllers/add-suervey-controller';
 import { throwError } from '@/tests/domain/mocks';
 import { mockValidation, mockAddSurvey } from '@/tests/presentation/mocks';
 

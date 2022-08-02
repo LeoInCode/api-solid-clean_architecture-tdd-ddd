@@ -3,13 +3,13 @@ import {
   ok,
   serverError,
   unauthorized,
-} from '@/presentation/helpers/http/http-helper';
+} from '@/presentation/helpers/http-helper';
 import { MissingParamError } from '@/presentation/errors';
 import {
   HttpRequest,
   Authentication,
 } from '@/presentation/controllers/account/login/login-controller-protocols';
-import { LoginController } from '@/presentation/controllers/account/login/login-controller';
+import { LoginController } from '@/presentation/controllers/login-controller';
 import { Validation } from '@/presentation/controllers/account/signup/signup-controller-protocols';
 import { mockAuthenticationModel, throwError } from '@/tests/domain/mocks';
 import { mockAuthentication, mockValidation } from '@/tests/presentation/mocks';

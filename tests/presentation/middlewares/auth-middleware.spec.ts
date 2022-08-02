@@ -3,11 +3,7 @@ import {
   HttpRequest,
 } from '@/presentation/middlewares/auth-middleware-protocols';
 import { AccessDeniedError } from '@/presentation/errors';
-import {
-  forbidden,
-  ok,
-  serverError,
-} from '@/presentation/helpers/http/http-helper';
+import { forbidden, ok, serverError } from '@/presentation/helpers/http-helper';
 import { AuthMiddleware } from '@/presentation/middlewares/auth-middleware';
 import { mockLoadAccontByToken } from '@/tests/presentation/mocks/mock-account';
 import { throwError } from '@/tests/domain/mocks';
