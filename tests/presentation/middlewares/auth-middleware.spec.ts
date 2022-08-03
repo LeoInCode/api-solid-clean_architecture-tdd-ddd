@@ -1,4 +1,3 @@
-import { HttpRequest } from '@/presentation/protocols';
 import { AccessDeniedError } from '@/presentation/errors';
 import { forbidden, ok, serverError } from '@/presentation/helpers';
 import { AuthMiddleware } from '@/presentation/middlewares';
@@ -6,10 +5,8 @@ import { LoadAccountByToken } from '@/domain/usecases';
 import { mockLoadAccontByToken } from '@/tests/presentation/mocks';
 import { throwError } from '@/tests/domain/mocks';
 
-const mockRequest = (): HttpRequest => ({
-  headers: {
-    'x-access-token': 'any_token',
-  },
+const mockRequest = (): AuthMiddleware.Request => ({
+  accessToken: 'any_token',
 });
 
 type SutTypes = {
@@ -37,8 +34,9 @@ describe('Auth Middleware', () => {
     const role = 'any_role';
     const { sut, loadAccountByTokenStub } = makeSut(role);
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load');
-    await sut.handle(mockRequest());
-    expect(loadSpy).toHaveBeenCalledWith('any_token', role);
+    const request = mockRequest();
+    await sut.handle(request);
+    expect(loadSpy).toHaveBeenCalledWith(request.accessToken, role);
   });
 
   test('Should return 403 LoadAccountByToken returns null', async () => {
@@ -46,7 +44,6 @@ describe('Auth Middleware', () => {
     jest
       .spyOn(loadAccountByTokenStub, 'load')
       .mockReturnValueOnce(Promise.resolve(null));
-
     const httpResponse = await sut.handle(mockRequest());
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()));
   });

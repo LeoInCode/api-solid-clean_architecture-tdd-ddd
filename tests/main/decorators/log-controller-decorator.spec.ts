@@ -1,30 +1,23 @@
 import { LogControllerDecorator } from '@/main/decorators';
 import { ok, serverError } from '@/presentation/helpers';
-import {
-  Controller,
-  HttpRequest,
-  HttpResponse,
-} from '@/presentation/protocols';
+import { Controller, HttpResponse } from '@/presentation/protocols';
 import { LogErrorRepository } from '@/data/protocols/db/log';
 import { mockLogErrorRepository } from '@/tests/data/mocks';
 import { mockAccountModel } from '@/tests/domain/mocks';
 
-const mockRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_password',
-    passwordConfirmation: 'any_password',
-  },
+const mockRequest = (): any => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_password',
+  passwordConfirmation: 'any_password',
 });
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
-    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle(request: any): Promise<HttpResponse> {
       return Promise.resolve(ok(mockAccountModel()));
     }
   }
-
   return new ControllerStub();
 };
 
@@ -47,7 +40,6 @@ const makeSut = (): SutTypes => {
     controllerStub,
     logErrorRepositoryStub,
   );
-
   return {
     sut,
     controllerStub,
@@ -65,7 +57,6 @@ describe('LogController Decorator', () => {
 
   test('Should return the same result of the controller', async () => {
     const { sut } = makeSut();
-
     const httpResponse = await sut.handle(mockRequest());
     expect(httpResponse).toEqual(ok(mockAccountModel()));
   });

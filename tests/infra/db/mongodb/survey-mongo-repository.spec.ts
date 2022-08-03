@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Collection } from 'mongodb';
 import { AccountModel } from '@/domain/models';
 import { SurveyMongoRepository, MongoHelper } from '@/infra/db';

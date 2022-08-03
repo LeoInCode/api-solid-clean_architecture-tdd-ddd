@@ -1,12 +1,13 @@
 import MockDate from 'mockdate';
-import { HttpRequest } from '@/presentation/protocols';
 import { noContent, ok, serverError } from '@/presentation/helpers';
 import { LoadSurveysController } from '@/presentation/controllers';
 import { LoadSurveys } from '@/domain/usecases';
 import { mockSurveyModels, throwError } from '@/tests/domain/mocks';
 import { mockLoadSurveys } from '@/tests/presentation/mocks';
 
-const mockRequest = (): HttpRequest => ({ accountId: 'any_account_id' });
+const mockRequest = (): LoadSurveysController.Request => ({
+  accountId: 'any_account_id',
+});
 
 type SutTypes = {
   sut: LoadSurveysController;
@@ -34,9 +35,9 @@ describe('LoadSurveys Controller', () => {
   test('Should call LoadSurveys with correct value', async () => {
     const { sut, loadSurveysStub } = makeSut();
     const loadSpy = jest.spyOn(loadSurveysStub, 'load');
-    const httpRequest = mockRequest();
-    await sut.handle(httpRequest);
-    expect(loadSpy).toHaveBeenCalledWith(httpRequest.accountId);
+    const request = mockRequest();
+    await sut.handle(request);
+    expect(loadSpy).toHaveBeenCalledWith(request.accountId);
   });
 
   test('Should return 200 on success', async () => {
