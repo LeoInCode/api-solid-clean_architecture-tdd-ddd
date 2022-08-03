@@ -1,7 +1,7 @@
 import { SurveyModel } from '@/domain/models';
-import { AddSurveyParams } from '@/domain/usecases';
+import { AddSurvey } from '@/domain/usecases';
 
-export const mockSurveyParams = (): AddSurveyParams => ({
+export const mockSurveyParams = (): AddSurvey.Params => ({
   question: 'any_question',
   answers: [
     {
@@ -12,7 +12,7 @@ export const mockSurveyParams = (): AddSurveyParams => ({
   date: new Date(),
 });
 
-export const mockSurveysParams = (): AddSurveyParams[] => [
+export const mockSurveysParams = (): AddSurvey.Params[] => [
   {
     question: 'any_question',
     answers: [
