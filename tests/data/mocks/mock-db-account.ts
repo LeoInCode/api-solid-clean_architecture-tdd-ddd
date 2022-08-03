@@ -4,13 +4,14 @@ import {
   LoadAccountByEmailRepository,
   AddAccountRepository,
 } from '@/data/protocols';
-import { AddAccountParams } from '@/domain/usecases';
 import { AccountModel } from '@/domain/models';
 import { mockAccountModel } from '@/tests/domain/mocks';
 
 export const mockAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
-    async add(accountData: AddAccountParams): Promise<AccountModel> {
+    async add(
+      accountData: AddAccountRepository.Params,
+    ): Promise<AddAccountRepository.Result> {
       return Promise.resolve(mockAccountModel());
     }
   }
