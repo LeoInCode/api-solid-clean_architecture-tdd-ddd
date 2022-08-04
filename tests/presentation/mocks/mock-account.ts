@@ -31,7 +31,7 @@ export const mockAuthentication = (): Authentication => {
 
 export const mockLoadAccontByToken = () => {
   class LoadAccountByTokenStub implements LoadAccountByToken {
-    async load(accessToken: string): Promise<AccountModel> {
+    async load(accessToken: string): Promise<LoadAccountByToken.Result> {
       return Promise.resolve(mockAccountModel());
     }
   }
