@@ -1,13 +1,12 @@
-import { AccountModel, AuthenticationModel } from '@/domain/models';
+import { AccountModel } from '@/domain/models';
 import {
   LoadAccountByToken,
   Authentication,
-  AuthenticationParams,
   AddAccount,
 } from '@/domain/usecases';
 import {
   mockAccountModel,
-  mockAuthenticationModel,
+  mockAuthenticationResult,
 } from '@/tests/domain/mocks';
 
 export const mockAddAccount = (): AddAccount => {
@@ -22,9 +21,9 @@ export const mockAddAccount = (): AddAccount => {
 export const mockAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
     async auth(
-      authentication: AuthenticationParams,
-    ): Promise<AuthenticationModel> {
-      return Promise.resolve(mockAuthenticationModel());
+      authentication: Authentication.Params,
+    ): Promise<Authentication.Result> {
+      return Promise.resolve(mockAuthenticationResult());
     }
   }
   return new AuthenticationStub();

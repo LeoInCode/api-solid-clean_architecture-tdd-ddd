@@ -8,7 +8,7 @@ import {
   mockAuthentication,
   mockValidation,
 } from '@/tests/presentation/mocks';
-import { mockAuthenticationModel, throwError } from '@/tests/domain/mocks';
+import { mockAuthenticationResult, throwError } from '@/tests/domain/mocks';
 
 const mockRequest = (): SignUpController.Request => ({
   name: 'any_name',
@@ -76,7 +76,7 @@ describe('SignUp Controller', () => {
   test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle(mockRequest());
-    expect(httpResponse).toEqual(ok(mockAuthenticationModel()));
+    expect(httpResponse).toEqual(ok(mockAuthenticationResult()));
   });
 
   test('Should call Validation with correct values', async () => {
