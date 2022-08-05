@@ -1,15 +1,10 @@
 import round from 'mongo-round';
-import {
-  SaveSurveyResultRepository,
-  LoadSurveyResultRepository,
-} from '@/data/protocols';
+import { SaveSurveyResultRepository, LoadSurveyResultRepository } from '@/data/protocols';
 import { SurveyResultModel } from '@/domain/models';
 import { SaveSurveyResulParams } from '@/domain/usecases';
 import { MongoHelper, QueryBuilder } from '@/infra/db';
 
-export class SurveyResultMongoRepository
-  implements SaveSurveyResultRepository, LoadSurveyResultRepository
-{
+export class SurveyResultMongoRepository implements SaveSurveyResultRepository, LoadSurveyResultRepository {
   async save(data: SaveSurveyResulParams): Promise<void> {
     const surveyResultCollection = MongoHelper.getCollection('surveyResults');
     await surveyResultCollection.findOneAndUpdate(
@@ -29,10 +24,7 @@ export class SurveyResultMongoRepository
     );
   }
 
-  async loadBySurveyId(
-    surveyId: string,
-    accountId: string,
-  ): Promise<SurveyResultModel> {
+  async loadBySurveyId(surveyId: string, accountId: string): Promise<SurveyResultModel> {
     const surveyResultCollection = MongoHelper.getCollection('surveyResults');
     const query = new QueryBuilder()
       .match({
@@ -75,10 +67,7 @@ export class SurveyResultMongoRepository
           $push: {
             $cond: [
               {
-                $eq: [
-                  '$data.accountId',
-                  MongoHelper.parseToObjectId(accountId),
-                ],
+                $eq: ['$data.accountId', MongoHelper.parseToObjectId(accountId)],
               },
               '$data.answer',
               null,
@@ -217,9 +206,7 @@ export class SurveyResultMongoRepository
       })
       .build();
 
-    const surveyResult = await surveyResultCollection
-      .aggregate<SurveyResultModel>(query)
-      .toArray();
+    const surveyResult = await surveyResultCollection.aggregate<SurveyResultModel>(query).toArray();
     return surveyResult.length ? surveyResult[0] : null;
   }
 }

@@ -1,9 +1,7 @@
 import { AddAccount } from '@/domain/usecases';
 
 export interface AddAccountRepository {
-  add(
-    accountData: AddAccountRepository.Params,
-  ): Promise<AddAccountRepository.Result>;
+  add(accountData: AddAccountRepository.Params): Promise<AddAccountRepository.Result>;
 }
 
 export namespace AddAccountRepository {

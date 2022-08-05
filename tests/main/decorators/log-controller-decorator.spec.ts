@@ -35,10 +35,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const controllerStub = makeController();
   const logErrorRepositoryStub = mockLogErrorRepository();
-  const sut = new LogControllerDecorator(
-    controllerStub,
-    logErrorRepositoryStub,
-  );
+  const sut = new LogControllerDecorator(controllerStub, logErrorRepositoryStub);
   return {
     sut,
     controllerStub,
@@ -62,9 +59,7 @@ describe('LogController Decorator', () => {
 
   test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
     const { sut, controllerStub, logErrorRepositoryStub } = makeSut();
-    jest
-      .spyOn(controllerStub, 'handle')
-      .mockReturnValueOnce(Promise.resolve(mockServerError()));
+    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(mockServerError()));
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError');
 
     await sut.handle(mockRequest());

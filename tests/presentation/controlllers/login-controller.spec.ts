@@ -1,11 +1,6 @@
 import { LoginController } from '@/presentation/controllers';
 import { Validation } from '@/presentation/protocols';
-import {
-  badRequest,
-  ok,
-  serverError,
-  unauthorized,
-} from '@/presentation/helpers';
+import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers';
 import { MissingParamError } from '@/presentation/errors';
 import { Authentication } from '@/domain/usecases';
 import { mockAuthenticationResult, throwError } from '@/tests/domain/mocks';
@@ -47,9 +42,7 @@ describe('Login Controller', () => {
 
   test('Should return 401 if invalid credentials are provided', async () => {
     const { sut, authenticationStub } = makeSut();
-    jest
-      .spyOn(authenticationStub, 'auth')
-      .mockImplementationOnce(() => Promise.resolve(null));
+    jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(() => Promise.resolve(null));
     const httpResponse = await sut.handle(mockRequest());
     expect(httpResponse).toEqual(unauthorized());
   });
@@ -77,12 +70,8 @@ describe('Login Controller', () => {
 
   test('Should return 400 if Validation returns an error', async () => {
     const { sut, validationStub } = makeSut();
-    jest
-      .spyOn(validationStub, 'validate')
-      .mockReturnValueOnce(new MissingParamError('any_field'));
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'));
     const httpResponse = await sut.handle(mockRequest());
-    expect(httpResponse).toEqual(
-      badRequest(new MissingParamError('any_field')),
-    );
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')));
   });
 });

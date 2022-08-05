@@ -1,16 +1,9 @@
-import {
-  LoadSurveysRepository,
-  LoadSurveyByIdRepository,
-  AddSurveyRepository,
-} from '@/data/protocols';
+import { LoadSurveysRepository, LoadSurveyByIdRepository, AddSurveyRepository } from '@/data/protocols';
 import { SurveyModel } from '@/domain/models';
 import { MongoHelper, QueryBuilder } from '@/infra/db';
 
 export class SurveyMongoRepository
-  implements
-    AddSurveyRepository,
-    LoadSurveysRepository,
-    LoadSurveyByIdRepository
+  implements AddSurveyRepository, LoadSurveysRepository, LoadSurveyByIdRepository
 {
   async add(surveyData: AddSurveyRepository.Params): Promise<void> {
     const surveyCollection = MongoHelper.getCollection('surveys');
@@ -39,10 +32,7 @@ export class SurveyMongoRepository
                   input: '$result',
                   as: 'item',
                   cond: {
-                    $eq: [
-                      '$$item.accountId',
-                      MongoHelper.parseToObjectId(accountId),
-                    ],
+                    $eq: ['$$item.accountId', MongoHelper.parseToObjectId(accountId)],
                   },
                 },
               },

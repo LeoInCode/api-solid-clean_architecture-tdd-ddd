@@ -41,9 +41,7 @@ describe('DbLoadSurveys UseCase', () => {
 
   test('Should throw if LoadSurveysRepository throww', async () => {
     const { sut, loadSurveysRepositoryStub } = makeSut();
-    jest
-      .spyOn(loadSurveysRepositoryStub, 'loadAll')
-      .mockImplementationOnce(throwError);
+    jest.spyOn(loadSurveysRepositoryStub, 'loadAll').mockImplementationOnce(throwError);
     const account = sut.load('any_id');
     expect(account).rejects.toThrow();
   });

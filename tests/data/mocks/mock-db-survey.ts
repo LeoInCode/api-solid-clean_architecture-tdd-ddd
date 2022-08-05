@@ -1,8 +1,4 @@
-import {
-  LoadSurveysRepository,
-  AddSurveyRepository,
-  LoadSurveyByIdRepository,
-} from '@/data/protocols';
+import { LoadSurveysRepository, AddSurveyRepository, LoadSurveyByIdRepository } from '@/data/protocols';
 import { SurveyModel } from '@/domain/models';
 import { mockSurveyModel, mockSurveyModels } from '@/tests/domain/mocks';
 

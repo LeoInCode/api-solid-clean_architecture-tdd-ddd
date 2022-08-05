@@ -1,8 +1,4 @@
-import {
-  LoadAccountByToken,
-  Authentication,
-  AddAccount,
-} from '@/domain/usecases';
+import { LoadAccountByToken, Authentication, AddAccount } from '@/domain/usecases';
 import { mockAuthenticationResult } from '@/tests/domain/mocks';
 
 export const mockAddAccount = (): AddAccount => {
@@ -16,9 +12,7 @@ export const mockAddAccount = (): AddAccount => {
 
 export const mockAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth(
-      authentication: Authentication.Params,
-    ): Promise<Authentication.Result> {
+    async auth(authentication: Authentication.Params): Promise<Authentication.Result> {
       return Promise.resolve(mockAuthenticationResult());
     }
   }

@@ -13,17 +13,13 @@ export class AccountMongoRepository
     UpdateAccessTokenRepository,
     LoadAccountByTokenRepository
 {
-  async add(
-    accountData: AddAccountRepository.Params,
-  ): Promise<AddAccountRepository.Result> {
+  async add(accountData: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
     const accountCollection = MongoHelper.getCollection('accounts');
     const result = await accountCollection.insertOne(accountData);
     return result.insertedId !== null;
   }
 
-  async loadByEmail(
-    email: string,
-  ): Promise<LoadAccountByEmailRepository.Result> {
+  async loadByEmail(email: string): Promise<LoadAccountByEmailRepository.Result> {
     const accountCollection = MongoHelper.getCollection('accounts');
     const account = await accountCollection.findOne(
       { email },
@@ -51,10 +47,7 @@ export class AccountMongoRepository
     );
   }
 
-  async loadByToken(
-    token: string,
-    role?: string,
-  ): Promise<LoadAccountByTokenRepository.Result> {
+  async loadByToken(token: string, role?: string): Promise<LoadAccountByTokenRepository.Result> {
     const accountCollection = MongoHelper.getCollection('accounts');
     const account = await accountCollection.findOne(
       {

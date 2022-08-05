@@ -15,10 +15,7 @@ const makeAccessToken = async (): Promise<string> => {
     password: '123',
     role: 'admin',
   });
-  const accessToken = await jwt.sign(
-    { id: res.insertedId.toHexString() },
-    env.jwtSecret,
-  );
+  const accessToken = await jwt.sign({ id: res.insertedId.toHexString() }, env.jwtSecret);
   await accountCollection.updateOne(
     { _id: res.insertedId },
     {

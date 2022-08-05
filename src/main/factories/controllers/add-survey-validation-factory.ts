@@ -1,7 +1,4 @@
-import {
-  RequiredFielValidation,
-  ValidationComposite,
-} from '@/validation/validators';
+import { RequiredFielValidation, ValidationComposite } from '@/validation/validators';
 import { Validation } from '@/presentation/protocols';
 
 export const makeAddSurveyValidation = (): ValidationComposite => {

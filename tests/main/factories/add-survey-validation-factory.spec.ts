@@ -1,7 +1,4 @@
-import {
-  RequiredFielValidation,
-  ValidationComposite,
-} from '@/validation/validators';
+import { RequiredFielValidation, ValidationComposite } from '@/validation/validators';
 import { Validation } from '@/presentation/protocols';
 import { makeAddSurveyValidation } from '@/main/factories/controllers';
 

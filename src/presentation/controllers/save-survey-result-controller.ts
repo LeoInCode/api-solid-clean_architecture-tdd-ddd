@@ -9,9 +9,7 @@ export class SaveSurveyResultController implements Controller {
     private readonly saveSurveyResult: SaveSurveyResult,
   ) {}
 
-  async handle(
-    request: SaveSurveyResultController.Request,
-  ): Promise<HttpResponse> {
+  async handle(request: SaveSurveyResultController.Request): Promise<HttpResponse> {
     try {
       const { surveyId, accountId, answer } = request;
       const survey = await this.loadSurveyById.loadById(surveyId);

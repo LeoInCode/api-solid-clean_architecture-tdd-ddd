@@ -1,7 +1,4 @@
-import {
-  LoadSurveyResultRepository,
-  SaveSurveyResultRepository,
-} from '@/data/protocols';
+import { LoadSurveyResultRepository, SaveSurveyResultRepository } from '@/data/protocols';
 import { SurveyResultModel } from '@/domain/models';
 import { SaveSurveyResult, SaveSurveyResulParams } from '@/domain/usecases';
 
@@ -13,10 +10,7 @@ export class DbSaveSurveyResult implements SaveSurveyResult {
 
   async save(data: SaveSurveyResulParams): Promise<SurveyResultModel> {
     await this.saveSurveyResultRepository.save(data);
-    const serveyResult = await this.loadSurveyResultRepository.loadBySurveyId(
-      data.surveyId,
-      data.accountId,
-    );
+    const serveyResult = await this.loadSurveyResultRepository.loadBySurveyId(data.surveyId, data.accountId);
     return serveyResult;
   }
 }

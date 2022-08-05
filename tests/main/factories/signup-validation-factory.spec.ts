@@ -26,9 +26,7 @@ describe('SignUpValidation Factory', () => {
     for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
       validations.push(new RequiredFielValidation(field));
     }
-    validations.push(
-      new CompareFieldsValidation('password', 'passwordConfirmation'),
-    );
+    validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'));
     validations.push(new EmailValidation('email', makeEmailValdiator()));
     expect(ValidationComposite).toHaveBeenCalledWith(validations);
   });
