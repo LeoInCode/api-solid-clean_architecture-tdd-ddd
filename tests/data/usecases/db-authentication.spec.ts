@@ -5,10 +5,7 @@ import {
   LoadAccountByEmailRepository,
   UpdateAccessTokenRepository,
 } from '@/data/protocols';
-import {
-  mockAccountModel,
-  mockAuthenticationParams,
-} from '@/tests/domain/mocks';
+import { mockAuthenticationParams } from '@/tests/domain/mocks';
 import {
   mockEncrypter,
   mockHashComparer,
@@ -116,10 +113,9 @@ describe('DbAuthentication UseCase', () => {
 
   test('Should return an AuthenticationResult on success', async () => {
     const { sut } = makeSut();
-    const loadByEmail = mockAccountModel();
     const { accessToken, name } = await sut.auth(mockAuthenticationParams());
     expect(accessToken).toBe('any_token');
-    expect(name).toBe(loadByEmail.name);
+    expect(name).toBe('any_name');
   });
 
   test('Should call UpdateAccessTokenRepository with correct values', async () => {

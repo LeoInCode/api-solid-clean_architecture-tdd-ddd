@@ -4,7 +4,6 @@ import {
   UpdateAccessTokenRepository,
   AddAccountRepository,
 } from '@/data/protocols';
-import { AccountModel } from '@/domain/models';
 import { MongoHelper } from '@/infra/db';
 
 export class AccountMongoRepository
@@ -22,9 +21,20 @@ export class AccountMongoRepository
     return result.insertedId !== null;
   }
 
-  async loadByEmail(email: string): Promise<AccountModel> {
+  async loadByEmail(
+    email: string,
+  ): Promise<LoadAccountByEmailRepository.Result> {
     const accountCollection = MongoHelper.getCollection('accounts');
-    const account = await accountCollection.findOne({ email });
+    const account = await accountCollection.findOne(
+      { email },
+      {
+        projection: {
+          _id: 1,
+          name: 1,
+          password: 1,
+        },
+      },
+    );
     return MongoHelper.map(account);
   }
 
