@@ -1,4 +1,5 @@
 import { Collection } from 'mongodb';
+import FakeObjectId from 'bson-objectid';
 import { SurveyMongoRepository, MongoHelper } from '@/infra/db';
 import { mockAddAccountParams, mockSurveysParams } from '@/tests/domain/mocks';
 
@@ -86,6 +87,22 @@ describe('Survey Mongo Repository', () => {
       const res = await surveyCollection.insertOne(surveys[0]);
       const survey = await sut.loadById(res.insertedId.toHexString());
       expect(survey).toBeTruthy();
+    });
+  });
+
+  describe('checkById()', () => {
+    test('Should return true if survey exists', async () => {
+      const sut = makeSut();
+      const surveys = mockSurveysParams();
+      const res = await surveyCollection.insertOne(surveys[0]);
+      const survey = await sut.checkById(res.insertedId.toHexString());
+      expect(survey).toBe(true);
+    });
+
+    test('Should return false if survey exists', async () => {
+      const sut = makeSut();
+      const survey = await sut.checkById(new FakeObjectId().toHexString());
+      expect(survey).toBe(false);
     });
   });
 });
