@@ -1,11 +1,9 @@
 import { SaveSurveyResultRepository, LoadSurveyResultRepository } from '@/data/protocols';
-import { SurveyResultModel } from '@/domain/models';
-import { SaveSurveyResulParams } from '@/domain/usecases';
 import { mockSurveyResultModel } from '@/tests/domain/mocks';
 
 export const mockSaveSurveyResultRepository = (): SaveSurveyResultRepository => {
   class SaveSurveyResultRepositoryStub implements SaveSurveyResultRepository {
-    async save(data: SaveSurveyResulParams): Promise<void> {
+    async save(data: SaveSurveyResultRepository.Params): Promise<void> {
       return Promise.resolve();
     }
   }
@@ -14,7 +12,7 @@ export const mockSaveSurveyResultRepository = (): SaveSurveyResultRepository => 
 
 export const mockLoadSurveyResultRepository = (): LoadSurveyResultRepository => {
   class LoadSurveyResultRepositoryStub implements LoadSurveyResultRepository {
-    loadBySurveyId(surveyId: string, accountId: string): Promise<SurveyResultModel> {
+    loadBySurveyId(surveyId: string, accountId: string): Promise<LoadSurveyResultRepository.Result> {
       return Promise.resolve(mockSurveyResultModel());
     }
   }

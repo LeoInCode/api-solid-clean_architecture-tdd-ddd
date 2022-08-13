@@ -1,4 +1,3 @@
-import { SurveyModel } from '@/domain/models';
 import { AddSurvey, LoadSurveys, LoadAnswersBySurvey, CheckSurveyById } from '@/domain/usecases';
 import { mockSurveyModel, mockSurveyModels } from '@/tests/domain/mocks';
 
@@ -13,7 +12,7 @@ export const mockAddSurvey = (): AddSurvey => {
 
 export const mockLoadSurveys = (): LoadSurveys => {
   class LoadSurveysStub implements LoadSurveys {
-    async load(accountId: string): Promise<SurveyModel[]> {
+    async load(accountId: string): Promise<LoadSurveys.Result> {
       return Promise.resolve(mockSurveyModels());
     }
   }
