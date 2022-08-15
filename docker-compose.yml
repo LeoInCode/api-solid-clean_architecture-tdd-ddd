@@ -10,13 +10,17 @@ services:
       - "27017:27017"
   api:
     container_name: api-container
-    build: .
-    image: api-solid-clean_architecture-tdd-ddd
+    image: node:12
+    working_dir: /usr/src/api-solid-clean_architecture-tdd-ddd
     restart: always
-    command: npm start
+    command: bash -c "npm install --only=prod && npm run debug"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/api-solid-clean_architecture-tdd-ddd
     volumes:
-      - ./dist:/usr/src/api-solid-clean_architecture-tdd-ddd/dist
+      - ./dist/:/usr/src/api-solid-clean_architecture-tdd-ddd/dist/
+      - ./package.json:/usr/src/api-solid-clean_architecture-tdd-ddd/package.json
     ports:
       - "5050:5050"
+      - "9222:9222"
     links:
       - mongo
