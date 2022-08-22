@@ -1,8 +1,9 @@
-import { Express } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { GraphQLError } from 'graphql';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import resolvers from '@/main/graphql/resolvers';
 import typeDefs from '@/main/graphql/type-defs';
+import { authDirectiveTransformer } from '@/main/graphql/directives';
 
 const checkError = (error: GraphQLError, errorName: string): boolean => {
   return [error.name, error.originalError?.name].some((name) => name === errorName);
@@ -23,10 +24,13 @@ const handleErrors = (response: any, errors: readonly GraphQLError[]): void => {
   });
 };
 
-const setApolloServer = async (app: Express): Promise<void> => {
-  const server = new ApolloServer({
-    resolvers,
-    typeDefs,
+let schema = makeExecutableSchema({ resolvers, typeDefs });
+schema = authDirectiveTransformer(schema);
+
+export const setupApolloServer = async (): Promise<ApolloServer> =>
+  new ApolloServer({
+    schema,
+    context: ({ req }) => ({ req }),
     plugins: [
       {
         requestDidStart: async () => ({
@@ -35,8 +39,3 @@ const setApolloServer = async (app: Express): Promise<void> => {
       },
     ],
   });
-  await server.start();
-  server.applyMiddleware({ app });
-};
-
-export default setApolloServer;
