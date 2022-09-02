@@ -43,5 +43,28 @@ describe('Login GraphQL', () => {
       expect(res.body.data.login.accessToken).toBeTruthy();
       expect(res.body.data.login.name).toBe('Leo');
     });
+
+    test('Should return UnauthorizedError on invalid credentials', async () => {
+      const res = await request(app).post('/graphql').send({ query });
+      expect(res.status).toBe(401);
+      expect(res.body.data).toBeFalsy();
+      expect(res.body.errors[0].message).toBe('Unauthorized');
+    });
+  });
+
+  describe('SignUp Mutation', () => {
+    const query = `mutation {
+      signUp (name: "Leo", email: "leo@mail.com", password: "123", passwordConfirmation: "123") {
+        accessToken
+        name
+      }
+    }`;
+
+    test('Should return an Account on valid data', async () => {
+      const res = await request(app).post('/graphql').send({ query });
+      expect(res.status).toBe(200);
+      expect(res.body.data.signUp.accessToken).toBeTruthy();
+      expect(res.body.data.signUp.name).toBe('Leo');
+    });
   });
 });
